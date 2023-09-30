@@ -1,4 +1,13 @@
 <h1>Slame</h1>
 
-[License](https://zhrexx.github.io/Slame/blob/main/LICENSE)
+[![License](https://zhrexx.github.io/Slame/blob/main/LICENSE)
 
+
+<h2>How to install</h2>
+<p>Download the repo as a ZIP</p>
+<p>After Extract it in the Folder with your Project</p>
+<p>Then write in your Main file</p>
+            
+            from Slame import ZHRXX
+
+<p>Done you have installed Slame</p>
