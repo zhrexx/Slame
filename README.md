@@ -1,6 +1,6 @@
 <h1>Slame</h1>
 
-[License](https://github.com/Slame/blob/main/LICENSE)
+[License](https://github.com/Slame/LICENSE)
 
 
 <h2>How to install</h2>
