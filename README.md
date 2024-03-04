@@ -1,4 +1,4 @@
-<h1>Slame</h1>
+
 
 [License](https://github.com/Slame/LICENSE)
 
