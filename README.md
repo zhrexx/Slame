@@ -1,6 +1,6 @@
 
 
-[License](https://github.com/Slame/LICENSE)
+[License](https://github.com/zhrexx/Slame/LICENSE)
 
 
 <h2>How to install</h2>
