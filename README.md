@@ -34,7 +34,8 @@ Welcome to **Slame**! This project aims to revolutionize [Python module for serv
 ### Getting started is easy! Simply follow these steps:
 #### On Windows:
 ##### Use ```bash
-pip3 install Slame```
+pip3 install Slame
+```
 
 #### On Linux:
 ##### 1. Use 
