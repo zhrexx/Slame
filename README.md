@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License">
-  <img src="https://img.shields.io/github/issues/YourUsername/YourRepository" alt="GitHub issues">
+  <img src="https://img.shields.io/github/issues/zhrexx/Slame" alt="GitHub issues">
   <img src="https://img.shields.io/github/stars/YourUsername/YourRepository" alt="GitHub stars">
   <img src="https://img.shields.io/github/forks/YourUsername/YourRepository" alt="GitHub forks">
   <img src="https://img.shields.io/github/contributors/YourUsername/YourRepository" alt="GitHub contributors">
