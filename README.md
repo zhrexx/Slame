@@ -1,4 +1,4 @@
-# Project Name
+# Slame
 
 <p align="center">
   <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License">
@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/github/contributors/zhrexx/Slame" alt="GitHub contributors">
 </p>
 
-<div align="center"><em>Brief description of your project.</em></div>
+<div align="center"><em>Python module for serving a web server with built-in User System (login/register) and Sessions</em></div>
 
 ---
 
@@ -24,17 +24,26 @@
 
 ## Introduction
 
-Welcome to **Project Name**! This project aims to revolutionize [mention what your project does].
+Welcome to **Slame**! This project aims to revolutionize [Python module for serving a web server with built-in User System (login/register)].
 
 ---
 
 ## Installation
 
-Getting started is easy! Simply follow these steps:
+### Getting started is easy! Simply follow these steps:
+#### On Windows:
+##### Use ```bash
+pip3 install Slame```
 
-1. Clone the repository: `git clone https://github.com/yourusername/yourproject.git`
-2. Navigate to the project directory: `cd yourproject`
-3. Install dependencies: `npm install`
+#### On Linux:
+##### 1. Use ```bash
+python -m venv env```
+##### 2. Use ```bash
+source env/bin/activate```
+##### 3. Use ```bash
+pip3 install Slame```
+
+
 
 ---
 
@@ -43,9 +52,9 @@ Getting started is easy! Simply follow these steps:
 Here's how you can use **Project Name**:
 
 ```bash
-$ npm start
-That's it! Now you're ready to [mention what users can do with your project].
+import Slame
 ```
+
 ## Contributing
 We welcome contributions from the community! If you'd like to contribute to Project Name, please follow these guidelines:
 
