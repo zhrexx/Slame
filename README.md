@@ -55,7 +55,7 @@ Create a new branch: git checkout -b feature-name
 Make your changes and commit them: git commit -m 'Add some feature'
 Push to the branch: git push origin feature-name
 Submit a pull request.
-Thank you for contributing to Project Name!
+Thank you for contributing to Project Name!```
 
 License
 This project is licensed under the MIT License. See the LICENSE.md file for details.
