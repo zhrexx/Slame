@@ -3,9 +3,9 @@
 <p align="center">
   <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License">
   <img src="https://img.shields.io/github/issues/zhrexx/Slame" alt="GitHub issues">
-  <img src="https://img.shields.io/github/stars/YourUsername/YourRepository" alt="GitHub stars">
-  <img src="https://img.shields.io/github/forks/YourUsername/YourRepository" alt="GitHub forks">
-  <img src="https://img.shields.io/github/contributors/YourUsername/YourRepository" alt="GitHub contributors">
+  <img src="https://img.shields.io/github/stars/zhrexx/Slame" alt="GitHub stars">
+  <img src="https://img.shields.io/github/forks/zhrexx/Slame" alt="GitHub forks">
+  <img src="https://img.shields.io/github/contributors//zhrexx/Slame" alt="GitHub contributors">
 </p>
 
 <div align="center">Brief description of your project.</div>
