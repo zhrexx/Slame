@@ -36,12 +36,20 @@ Welcome to **Slame**! This project aims to revolutionize [Python module for serv
 pip3 install Slame```
 
 #### On Linux:
-##### 1. Use ```bash
-python -m venv env```
-##### 2. Use ```bash
-source env/bin/activate```
-##### 3. Use ```bash
-pip3 install Slame```
+##### 1. Use 
+```bash
+python -m venv env
+```
+
+##### 2. Use 
+```bash
+source env/bin/activate
+```
+
+##### 3. Use 
+```bash
+pip3 install Slame
+```
 
 
 
@@ -49,7 +57,7 @@ pip3 install Slame```
 
 ## Usage
 
-Here's how you can use **Project Name**:
+Here's how you can use **Slame**:
 
 ```bash
 import Slame
