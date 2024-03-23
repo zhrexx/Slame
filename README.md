@@ -45,8 +45,8 @@ Here's how you can use **Project Name**:
 ```bash
 $ npm start
 That's it! Now you're ready to [mention what users can do with your project].
-
-Contributing
+```
+## Contributing
 We welcome contributions from the community! If you'd like to contribute to Project Name, please follow these guidelines:
 
 Check out the issues page for existing tasks or open a new one if you find a bug or have a feature request.
@@ -55,8 +55,8 @@ Create a new branch: git checkout -b feature-name
 Make your changes and commit them: git commit -m 'Add some feature'
 Push to the branch: git push origin feature-name
 Submit a pull request.
-Thank you for contributing to Project Name!```
+Thank you for contributing to Project Name!
 
-License
+## License
 This project is licensed under the MIT License. See the LICENSE.md file for details.
 This Markdown code incorporates a more expressive and visually appealing style, with emphasized text and clearer instructions. Adjustments have been made to the wording to make it more engaging and user-friendly.
