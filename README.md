@@ -19,7 +19,7 @@
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
-- [Docs]()
+- [Docs](https://zhrxxgroup.com/slame#docs)
 
 ---
 
@@ -80,3 +80,5 @@ Thank you for contributing to Project Name!
 ## License
 This project is licensed under the MIT License. See the LICENSE.md file for details.
 This Markdown code incorporates a more expressive and visually appealing style, with emphasized text and clearer instructions. Adjustments have been made to the wording to make it more engaging and user-friendly.
+## Docs
+<a href="https://zhrxxgroup.com/slame#docs">Click Here!</a>
