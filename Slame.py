@@ -1,19 +1,11 @@
-'''
-(c) ZHRXXgroup
-https://zhrxxgroup.com/
-
-Version: 1.0
-'''
-# VERSION 1.0
 import socket
 import os
 import secrets
 import time
 import sqlite3
 import hashlib
-
-#VERSION 1.1
 from urllib.parse import parse_qs
+
 
 class ZHRXX:
     def __init__(self, host, port):
@@ -24,10 +16,7 @@ class ZHRXX:
 
     def route(self, path, methods=['GET']):
         def decorator(func):
-            self.routes[path] = {
-                'methods': methods,
-                'handler': func
-            }
+            self.routes[path] = {'methods': methods, 'handler': func}
             return func
         return decorator
 
@@ -36,139 +25,111 @@ class ZHRXX:
 
     def start(self):
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         server_socket.bind((self.host, self.port))
         server_socket.listen(5)
-        print(f"Server is listening on {self.host}:{self.port}")
-
         while True:
-            client_socket, client_address = server_socket.accept()
+            client_socket, _ = server_socket.accept()
             request_data = client_socket.recv(1024).decode('utf-8')
-
             if request_data:
-                request_lines = request_data.split('\n')
+                request_lines = request_data.split('\r\n')
                 request_line = request_lines[0]
-                method, path, _ = request_line.split()
-                response = self.handle_request(method, path)
+                method, path, *_ = request_line.split()
+                body = request_lines[-1] if method == "POST" else None
+                response = self.handle_request(method, path, body)
                 client_socket.send(response.encode('utf-8'))
                 client_socket.close()
 
-    def handle_request(self, method, path, data=None):
-        # Execute middleware functions
+    def handle_request(self, method, path, body=None):
         for middleware in self.middlewares:
-        middleware()
+            result = middleware(method, path, body)
+            if result is not None:
+                return result
 
-        # Check if the requested path matches any defined route
-        if path in self.routes:
-        route = self.routes[path]
-        # Check if the requested HTTP method is allowed for the route
-            if method in route['methods']:
-                if method == 'POST':
-                # Execute the handler function for the matched route with provided data
-                    response = route['handler'](data)
-                else:
-                # Execute the handler function for the matched route
-                    response = route['handler'](method)
-            # Return a successful HTTP response with the response content
-                    return f"HTTP/1.1 200 OK\n\n{response}"
-            else:
-            # Return a "Method Not Allowed" response if the method is not allowed for the route
-                return "HTTP/1.1 405 Method Not Allowed\n\n405 Method Not Allowed"
-    # Check if the requested path starts with '/static/', indicating a static file request
-            elif path.startswith('/static/'):
-            # Serve the requested static file
+        for route_path, route in self.routes.items():
+            route_params = self.match_route(route_path, path)
+            if route_params is not None and method in route['methods']:
+                if method == 'POST' and body:
+                    body_data = parse_qs(body)
+                    return route['handler'](**route_params, body=body_data)
+                return route['handler'](**route_params)
+        
+        if path.startswith('/static/'):
             return self.serve_static_file(path)
-            else:
-                # Return a "Not Found" response for paths that don't match any route or static file
-                return "HTTP/1.1 404 Not Found\n\n404 Not Found"
+        
+        return "HTTP/1.1 404 Not Found\r\n\r\n404 Not Found"
 
-
-    @staticmethod
-    def read_file(file_path):
-        # Get the absolute path to the file based on the script's directory
+    def serve_static_file(self, path):
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        abs_file_path = os.path.join(script_dir, file_path)
-
+        abs_file_path = os.path.join(script_dir, path.lstrip('/'))
         try:
             with open(abs_file_path, 'rb') as file:
                 content = file.read()
-            return content.decode('utf-8')
+            return f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\n{content.decode('utf-8')}"
         except FileNotFoundError:
-            return "HTTP/1.1 404 Not Found\n\n404 Not Found"
+            return "HTTP/1.1 404 Not Found\r\n\r\n404 Not Found"
 
-
-
-
-
-
+    def match_route(self, route_path, request_path):
+        route_parts = route_path.split('/')
+        request_parts = request_path.split('/')
+        if len(route_parts) != len(request_parts):
+            return None
+        params = {}
+        for route_part, request_part in zip(route_parts, request_parts):
+            if route_part.startswith(':'):
+                params[route_part[1:]] = request_part
+            elif route_part != request_part:
+                return None
+        return params
 
 
 class Work_with_Database:
-    '''for user login'''
-    
     def __init__(self, db_name):
         self.db_name = db_name
         self.conn = sqlite3.connect(self.db_name)
         self.cursor = self.conn.cursor()
-
-        # Create the 'users' table if it doesn't exist
         self.cursor.execute('''CREATE TABLE IF NOT EXISTS users
                             (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                username TEXT UNIQUE NOT NULL,
-                                password TEXT NOT NULL)''')
+                             username TEXT UNIQUE NOT NULL,
+                             password TEXT NOT NULL)''')
         self.conn.commit()
 
     def close(self):
         self.conn.close()
 
     def add_user(self, username, password):
-        # Hash the password before storing it in the database
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
         try:
             self.cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, hashed_password))
             self.conn.commit()
             return True
         except sqlite3.IntegrityError:
-            return False  # Username is already taken
+            return False
 
     def verify_user(self, username, password):
-        # Verify user credentials and return user ID if successful
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
         self.cursor.execute("SELECT id FROM users WHERE username=? AND password=?", (username, hashed_password))
         user_data = self.cursor.fetchone()
-        if user_data:
-            return user_data[0]
-        return None
+        return user_data[0] if user_data else None
 
 
-
-
-
-
-'''
-(c) ZHRXXgroup
-https://zhrxxgroup.com
-
-Version: 1.1
-'''
 class Sessions:
-    session_data = {}  # Dictionary to store session data
-    session_timeout = 3600  # Session timeout in seconds (1 hour)
+    session_data = {}
+    session_timeout = 3600
 
     @staticmethod
     def create_session():
-        session_id = secrets.token_hex(16)  # Generate a random session ID
-        Sessions.session_data[session_id] = {'timestamp': time.time(), 'data': {}}  # Store creation timestamp and session data
+        session_id = secrets.token_hex(16)
+        Sessions.session_data[session_id] = {'timestamp': time.time(), 'data': {}}
         return session_id
 
     @staticmethod
     def get_session(session_id):
         session = Sessions.session_data.get(session_id)
-        if session:
-            # Check if the session has expired
-            if time.time() - session['timestamp'] > Sessions.session_timeout:
-                del Sessions.session_data[session_id]
-                return None
+        if session and time.time() - session['timestamp'] <= Sessions.session_timeout:
             return session
+        if session_id in Sessions.session_data:
+            del Sessions.session_data[session_id]
         return None
 
     @staticmethod
@@ -187,12 +148,8 @@ class Sessions:
         session = Sessions.get_session(session_id)
         if session:
             session['data'][key] = value
-            Sessions.update_session(session_id, session['data'])
 
     @staticmethod
     def get_session_data(session_id, key):
         session = Sessions.get_session(session_id)
-        if session:
-            return session['data'].get(key)
-        return None
-    
+        return session['data'].get(key) if session else None
