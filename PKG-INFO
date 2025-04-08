@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: Slame
+Version: 1.6.4
+Summary: Python module for serving a web server and more
+Home-page: https://github.com/zhrexx/Slame/
+Download-URL: https://zhrxxgroup.com/slame/download.php?file=Slame-1.3.tar.gz
+Author: ZHRXXgroup
+Author-email: info@zhrxxgroup.com
+License: MIT License, see LICENSE file
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Requires-Dist: requests
+Requires-Dist: tqdm
+Requires-Dist: zxpm
+
+Slame is an Python Module for serving a webserver and in 1.2 we added Plugins you can use your own plugins in Slame or you can download plugins from other Peoples at https://zhrxxgroup.com/slame/spm/. SLAME DOCS: https://zhrxxgroup.com/slame or https://github.com/zhrexx/Slame, OUR WEBSITE: https://zhrxxgroup.com

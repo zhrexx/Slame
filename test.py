@@ -1,16 +1,15 @@
-from slame import *
-import jwt
+from Slame.slame import *
 
-app = ZHRXX('127.0.0.1', 8080)
-app.use(logger_middleware)
-app.use(jwt_auth_middleware)
+server = ZHRXX("127.0.1", 2222)
 
-@app.route('/')
-def home(query):
-    return "Welcome to ZHRXX server!"
+@server.route("/")
+def index(method, merged_params, body):
+    return "Hello, World!"
 
-@app.route('/protected')
-def protected(query):
-    return "You have access to a protected route."
 
-app.start()
+if __name__ == "__main__":
+    server.start()
+
+
+
+
